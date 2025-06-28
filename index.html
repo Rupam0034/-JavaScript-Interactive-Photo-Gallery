@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Interactive Photo Gallery</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f2f2f2;
+      margin: 0;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 2em;
+      color: #333;
+    }
+
+    #image {
+      height: 300px;
+      width: 80%;
+      max-width: 700px;
+      background-color: #e0e0e0;
+      margin-bottom: 30px;
+      line-height: 300px;
+      font-size: 1.2em;
+      color: #444;
+      text-align: center;
+      background-size: cover;
+      background-position: center;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: all 0.4s ease-in-out;
+    }
+
+    .arrow {
+      font-size: 2em;
+      margin: 10px 0;
+      color: #888;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-5px);
+      }
+    }
+
+    .preview-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .preview {
+      height: 100px;
+      width: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: transform 0.3s ease, border 0.3s ease;
+    }
+
+    .preview:hover {
+      border: 2px solid #555;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📸 Interactive Photo Gallery</h1>
+
+  <div id="image">Hover over an image below to display here.</div>
+
+  <div class="arrow">⬇️</div>
+
+  <div class="preview-container">
+    <img class="preview" src="https://via.placeholder.com/300x200/ff7f7f/333?text=Photo+1"
+         alt="This is photo 1" onmouseover="upDate(this)" onmouseout="undo()">
+    <img class="preview" src="https://via.placeholder.com/300x200/7fbfff/333?text=Photo+2"
+         alt="This is photo 2" onmouseover="upDate(this)" onmouseout="undo()">
+    <img class="preview" src="https://via.placeholder.com/300x200/7fff7f/333?text=Photo+3"
+         alt="This is photo 3" onmouseover="upDate(this)" onmouseout="undo()">
+  </div>
+
+  <script>
+    function upDate(previewPic) {
+      const imageDiv = document.getElementById("image");
+      imageDiv.style.backgroundImage = "url('" + previewPic.src + "')";
+      imageDiv.innerHTML = previewPic.alt;
+    }
+
+    function undo() {
+      const imageDiv = document.getElementById("image");
+      imageDiv.style.backgroundImage = "url('')";
+      imageDiv.innerHTML = "Hover over an image below to display here.";
+    }
+  </script>
+
+</body>
+</html>
